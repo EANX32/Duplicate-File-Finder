@@ -15,7 +15,7 @@ Function Get-Folder($hashdirectory)
 }
 $hashdirectory = Get-Folder
 
-#Identify where to save files
+#Identify where to save the output file
 Function Get-Folder($outputdirectory)
 {
     [System.Reflection.Assembly]::LoadWithPartialName("System.windows.forms")|Out-Null
@@ -62,11 +62,11 @@ $usedarea = $worksheet.UsedRange
 #Save the file
 #$Workbook.SaveAs($xlsfile,51)
 
-#Delete first row and first column
+#Delete first row and first column that are not needed for sorting
 $worksheet.Cells.Item(1,1).EntireRow.Delete()
 $Worksheet.Cells.Item(1,1).EntireColumn.Delete()
 
-#sort data
+#sort data by hash value
 $sortcolumn = $worksheet.Range("A1:A10000")
 $usedarea.Sort($sortcolumn)
 
@@ -84,7 +84,7 @@ $Worksheet.Cells($counter,1).select()
 Do 
 {
     While ($Worksheet.Cells.Item($counter,1).value() -ne $Null)
-    {
+   {
 	    If ($Worksheet.Cells.Item($counter,1).Value() -ne $Worksheet.Cells.Item($counterplus,1).Value()) 
         {
             $Worksheet.Cells.Item($counter,1).EntireRow.Delete()
@@ -109,7 +109,7 @@ Do
         $counterless=$counterless + 1    
 } until ($counter -ne 1)
 
-#Insert row at top 
+#Insert row at top and label columns
 $worksheet.cells.item(1,1).entireRow.activate()
 $worksheet.cells.item(1,1).entireRow.insert()
 $worksheet.cells.item(1,1) = 'File Hash'
