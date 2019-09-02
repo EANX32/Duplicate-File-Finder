@@ -15,7 +15,7 @@ Function Get-Folder($hashdirectory)
 }
 $hashdirectory = Get-Folder
 
-#Identify where to save the output file
+#Identify where to save the output files
 Function Get-Folder($outputdirectory)
 {
     [System.Reflection.Assembly]::LoadWithPartialName("System.windows.forms")|Out-Null
